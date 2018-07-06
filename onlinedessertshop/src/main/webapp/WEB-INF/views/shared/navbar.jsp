@@ -24,7 +24,7 @@
 
 					<li id="contact"><a href="${contextRoot}/Contact">Contact</a></li>
 
-					<li id="listProducts"><a href="${contextRoot}/listproducts">View Products</a></li>
+					<li id="listProducts"><a href="${contextRoot}/show/all/products">View Products</a></li>
 					
 					
 
