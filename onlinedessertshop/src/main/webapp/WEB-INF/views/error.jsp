@@ -4,8 +4,6 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <spring:url var="css" value="/resources/css" />
-<spring:url var="js" value="/resources/js" />
-<spring:url var="images" value="/resources/images" />
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -17,11 +15,7 @@
 
 <title>Online Dessert - ${title}</title>
 
-<script>
-	window.menu = '${title}';
 
-	window.contextRoot = '${contextRoot}'
-</script>
 
 <!-- <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
@@ -50,33 +44,52 @@
 
 	<div class="wrapper">
 
-		<%@include file="./shared/navbar.jsp"%>
-
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					 <span class="icon-bar"></span> 
+					 <span class="icon-bar"></span> 
+					 <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="${contextRoot}/home">Explosion
+					Dessert</a>
+					
+					</div>
+					
+			</div>
+</nav>
 		<!-- Page Content -->
 		<div class="content">
 
-			<!-- Title will be shown when clicked home -->
-			<c:if test="${userClickHome == true}">
-				<%@include file="home.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickAbout == true}">
-				<%@include file="About.jsp"%>
-			</c:if>
-
-
-			<c:if test="${userClickContact == true}">
-				<%@include file="Contact.jsp"%>
-			</c:if>
+			<div class="container">
 			
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
-				<%@include file="listProducts.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickShowProduct == true}">
-				<%@include file="singleProduct.jsp"%>
-			</c:if>
-
+				<div class="row">
+				
+					<div class="col-xs-12">
+					
+						
+						<div class="jumbotron">
+						
+							<h1>${errorTitle}</h1>
+							<hr/>
+						
+							<blockquote style="word-wrap:break-word">
+								
+								${errorDescription}
+							
+							</blockquote>						
+						
+						</div>
+						
+											
+					</div>					
+				
+				</div>
+			
+			</div>
 
 		</div>
 
@@ -88,17 +101,6 @@
 		
 		
 
-		<!-- Bootstrap core JavaScript -->
-		<script src="${js}/bootstrap.min.js"></script>
-
-		<!-- Datatables Plugin -->
-		<script src="${js}/jquery.dataTables.js"></script>
-
-		<!-- Datatables Bootstrap -->
-		<script src="${js}/dataTables.bootstrap.js"></script>
-
-		<!-- Self Coded JavaScript -->
-		<script src="${js}/myapp.js"></script>
 
 	</div>
 

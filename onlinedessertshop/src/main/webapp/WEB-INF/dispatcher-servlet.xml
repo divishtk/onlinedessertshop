@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns = "http://www.springframework.org/schema/beans"
    xmlns:context="http://www.springframework.org/schema/context"
    xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -14,8 +14,10 @@
 
 
 
-	<context:component-scan base-package="com.dessert.onlinedessertshop.controller"/>
-	<context:component-scan base-package="com.dessert.onlinedessertbackend.daoimpl"/>
+	<context:component-scan base-package="com.dessert"/>
+	
+	
+	<!--<context:component-scan base-package="com.dessert.onlinedessertbackend"/>  -->
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

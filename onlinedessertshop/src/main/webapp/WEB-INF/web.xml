@@ -8,13 +8,20 @@
   <!-- Configuring front controller -->
  	<servlet>
 		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		
+		<!-- For throwing exception -->
 		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+		
+		
+			<!--  ><param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>-->
+			
+			
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		
 	</servlet>
 
 	<servlet-mapping>

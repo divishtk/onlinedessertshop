@@ -3,7 +3,12 @@ package com.dessert.onlinedessertbackend.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dessert.onlinedessertbackend.dao.CategoryDAO;
 import com.dessert.onlinnedessertbackend.dto.Category;
@@ -12,9 +17,17 @@ import com.dessert.onlinnedessertbackend.dto.Category;
 
 
 @Repository("categoryDAO")
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO 
 {
-
+	
+	
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	
+	
 	private static List<Category> categories=new ArrayList<>();
 	
 	static 
@@ -65,25 +78,108 @@ public class CategoryDAOImpl implements CategoryDAO
 	public List<Category> list() 
 	{
 		
-		return categories;
+		String selectActiveCategory="From Category WHERE active= :active";
+		
+		Query query =sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
+		
+		query.setParameter("active", true);
+		return query.getResultList();
+	}
+
+
+	
+	/*
+Getting single cat based on ID
+	 */
+	@Override
+	public Category get(int id) {
+		
+
+		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
+		
 	}
 
 
 	@Override
-	public Category get(int id) {
-		
-		//enhanced for  loop
-		
-		for(Category category : categories)
+
+	public boolean add(Category category) 
+	{
+		try
 		{
 			
+			//add the category to DB table
+			sessionFactory.getCurrentSession().persist(category);
 			
-			if(category.getId() == id) return category;
+			return true;
 			
 			
 		}
+		catch(Exception ex)
+		{
+			
+			ex.printStackTrace();
+			return false;
+		}
 		
-		return null;
+		
+	}
+
+
+	
+	
+	
+	
+	/*updateing a single category */
+	@Override
+	public boolean update(Category category) 
+	
+	{
+	
+		try
+		{
+			
+			//update the category to DB table
+			sessionFactory.getCurrentSession().update(category);
+			
+			return true;
+			
+			
+		}
+		catch(Exception ex)
+		{
+			
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+
+	
+	
+	
+	
+	
+	@Override
+	public boolean delete(Category category) 
+	
+	{
+		category.setActive(false);
+		try
+		{
+			
+			//add the category to DB table
+			sessionFactory.getCurrentSession().update(category);
+			
+			return true;
+			
+			
+		}
+		catch(Exception ex)
+		{
+			
+			ex.printStackTrace();
+			return false;
+		}	
 	}
 
 }
