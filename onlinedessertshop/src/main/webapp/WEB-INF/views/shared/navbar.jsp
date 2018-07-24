@@ -25,14 +25,15 @@
 					<li id="contact"><a href="${contextRoot}/Contact">Contact</a></li>
 
 					<li id="listProducts"><a href="${contextRoot}/show/all/products">View Products</a></li>
-					
+
+					<li id="manageProducts"><a href="${contextRoot}/manage/products">Manage Products</a></li>					
 					
 
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li class="signup"><a href="${contextRoot}/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-					<li class="login"><a href="${contextRoot}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li id="register"><a href="${contextRoot}/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li id="login"><a href="${contextRoot}/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</ul>
 
 			</div>

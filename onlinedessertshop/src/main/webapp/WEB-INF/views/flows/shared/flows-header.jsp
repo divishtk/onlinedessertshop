@@ -50,66 +50,30 @@
 
 	<div class="wrapper">
 
-		<%@include file="./shared/navbar.jsp"%>
-
-		<!-- Page Content -->
-		<div class="content">
-
-			<!-- Title will be shown when clicked home -->
-			<c:if test="${userClickHome == true}">
-				<%@include file="home.jsp"%>
-			</c:if>
-
-			<c:if test="${userClickAbout == true}">
-				<%@include file="About.jsp"%>
-			</c:if>
+		<!-- Navigation -->
 
 
-			<c:if test="${userClickContact == true}">
-				<%@include file="Contact.jsp"%>
-			</c:if>
-			
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true}">
-				<%@include file="listProducts.jsp"%>
-			</c:if>
+		<%-- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
 
-			<c:if test="${userClickShowProduct == true}">
-				<%@include file="singleProduct.jsp"%>
-			</c:if>
+				<div class="navbar-header">
 
-			<c:if test="${userClickManageProduct == true}">
-				<%@include file="manageProducts.jsp"%>
-			</c:if>
-			
+					<a class="navbar-brand" href="${flowExecutionUrl}&_eventId_home">Home</a>
 
-		</div>
+				</div>
 
-		<%@include file="./shared/footer.jsp"%>
+			</div>
 
-		<!-- JQuery -->
-		<script src="${js}/jquery.js"></script>
-	
-		<!-- Bootstrap core JavaScript -->
-		<script src="${js}/bootstrap.min.js"></script>
-
-		<!-- Datatables Plugin -->
-		<script src="${js}/jquery.dataTables.js"></script>
-
-		<!-- Datatables Bootstrap -->
-		<script src="${js}/dataTables.bootstrap.js"></script>
-
-		<!-- Self Coded JavaScript -->
-		<script src="${js}/myapp.js"></script>
+		</nav> --%>
 		
-		<!-- jQuery Validator -->
-		<script src="${js}/jquery.validate.js"></script>
+		
+		
+		
+					<%@include file="flows-navbar.jsp"%>
+					<div class="content">
+		
+		</div>
+		</body>
+		</html>
+		
 
-
-
-<!-- BOOTBOX -->
-		<script src="${js}/bootbox.min.js"></script>
-	</div>
-
-</body>
-
-</html>
