@@ -21,12 +21,28 @@
 
                <!-- is the start state -->
                <view-state id="personal" view="flows/register/signup-personal"  model="user">
-                <transition on="billing" to="billing"/> 
+                <transition on="billing" to="validate"/> 
                 <on-exit>
                         <evaluate expression="registerHandler.addUser(flowScope.registerModel,user)"/>          
-                </on-exit>
-                              
+                </on-exit>             
                </view-state>
+               
+               <action-state id="validate">
+               
+               <evaluate expression="registerHandler.validateUser(user,messageContext)"/>
+                <transition on="sucess" to="billing"/> 
+                 <transition on="failure" to="personal"/> 
+                
+               
+               
+               
+               </action-state>
+               
+               
+               
+               
+               
+               
                   
                <view-state id="billing" view="flows/register/signup-billing" model="billing">
                 <transition on="personal" to="personal"/> 
@@ -67,9 +83,9 @@
                           				<end-state id="sucess" view="flows/register/signup-sucess"/>
                           
                           
-				<!-- Global Transition -->
+				<!-- Global Transition {By default for every transition validation is true} -->
 				<global-transitions>
-				<transition on="home" to="home"/>
+				<transition on="home" to="home" validate="false"/>
 				</global-transitions>
 				</flow>
 			

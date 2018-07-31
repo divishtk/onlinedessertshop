@@ -199,9 +199,12 @@
 
 
 		<div class='col-xs-12'>
+			<div class="container-fluid">
 
-
-			<table id="adminProductsTable"
+				<div class="table-responsive">
+				
+				
+							<table id="adminProductsTable"
 				class="table table-condensed table-bordered">
 
 				<thead>
@@ -291,6 +294,16 @@
 
 
 			</table>
+				
+				
+				</div>
+
+
+
+
+			</div>
+
+
 
 
 		</div>
@@ -301,7 +314,7 @@
 
 
 
-<!-- Adding a MODAL DIALOOG BOX FOR ADDINF CATEGORYY -->
+	<!-- Adding a MODAL DIALOOG BOX FOR ADDINF CATEGORYY -->
 
 	<div class="modal fade" id="myCategoryModal" role="dialog"
 		tabindex="-1">
@@ -331,10 +344,10 @@
 							<label for="category_name" class="control-label col-md-4">Category
 								Name</label>
 
-						<div class="col-md-8 validate">
-							<sf:input type="text" path="name" id="category_name"
-								class="form-control" placeholder="Category Name" />
-						</div>
+							<div class="col-md-8 validate">
+								<sf:input type="text" path="name" id="category_name"
+									class="form-control" placeholder="Category Name" />
+							</div>
 						</div>
 
 
@@ -349,15 +362,16 @@
 									placeholder="Category Descrption" />
 							</div>
 						</div>
-						
 
 
 
-							<div class="form-group">
+
+						<div class="form-group">
 
 
 							<div class="col-md-offset-4 col-md-8">
-								<input type="submit" value="Add Category" class="btn btn-primary" />
+								<input type="submit" value="Add Category"
+									class="btn btn-primary" />
 
 							</div>
 						</div>

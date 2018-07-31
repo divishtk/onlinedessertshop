@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 
 
 @Entity
@@ -21,32 +23,31 @@ public class User implements Serializable
 {
 	private static final long serialVersionUID=1l;
 
-	
-	
-
-	/**
-	 * 
-	 */
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "first_name")
+	@NotBlank(message="Please enter first name")
 	private String firstName;
 
 	@Column(name = "last_name")
+	@NotBlank(message="Please enter last name")
 	private String lastName;
 	
 	
-	
+	@NotBlank(message="Please enter email address")
 	private String email;
+	
 	
 
 	@Column(name = "contact_number")
+	@NotBlank(message="Please enter Contact Number")
 	private String contactNumber;
 	private String role;
 	
+	
+	@NotBlank(message="Please enter password")
 	private String password;
 	private boolean enabled = true;
 	
@@ -119,13 +120,14 @@ public class User implements Serializable
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", contactNumber=" + contactNumber + ", role=" + role + ", password=" + password + ", enabled="
-				+ enabled + "]";
+				+ enabled + ", cart=" + cart + ", confirmPassword=" + confirmPassword + "]";
 	}
+	
+	
 	
 	
 

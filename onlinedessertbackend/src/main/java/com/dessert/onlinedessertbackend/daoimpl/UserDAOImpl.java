@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dessert.onlinedessertbackend.dao.UserDAO;
 import com.dessert.onlinnedessertbackend.dto.Address;
-import com.dessert.onlinnedessertbackend.dto.Cart;
+
 import com.dessert.onlinnedessertbackend.dto.User;
 
 
@@ -58,42 +58,42 @@ public class UserDAOImpl implements UserDAO
 		}
 		
 	}
-	@Override
-	public boolean updateCart(Cart cart) 
-	{
 
-		try {			
-			// will look for this code later and why we need to change it
-			sessionFactory.getCurrentSession().update(cart);			
-			return true;
-		}
-		catch(Exception ex) {
-			return false;
-		}
-	}
 
 	@Override
 	public User getByEmail(String email) 
 	{
-	  String selectQuery="FROM User WHERE email= :email";	
+//	  String selectQuery="FROM User WHERE email= :email";	
+//		
+//	  try
+//	  {
+//		  return sessionFactory
+//					.getCurrentSession()
+//						.createQuery(selectQuery,User.class)
+//							.setParameter("email",email)
+//								.getSingleResult();
+//		  
+//	  }
+//	  catch(Exception ex) 
+//	  
+//	  {
+//		  ex.printStackTrace();
+//		  return null;
+//		  
+//		  
+//	  }
 		
-	  try
-	  {
-		  return sessionFactory
-					.getCurrentSession()
-						.createQuery(selectQuery,User.class)
-							.setParameter("email",email)
-								.getSingleResult();
-		  
-	  }
-	  catch(Exception ex) 
-	  
-	  {
-		  ex.printStackTrace();
-		  return null;
-		  
-		  
-	  }
+		String selectQuery = "FROM User WHERE email = :email";
+		try {
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery,User.class)
+						.setParameter("email",email)
+							.getSingleResult();
+		}
+		catch(Exception ex) {
+			return null;
+		}
 	  
 	}
 /*

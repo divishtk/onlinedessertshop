@@ -19,6 +19,9 @@ $(function()
 		case 'Manage Products':
 			$('#manageProducts').addClass('active');
 			break;
+		case 'Shopping Cart':
+			$('#userCart').addClass('active');
+			break;
 			default:
 				if(menu == "Home") 
 					break;
@@ -31,10 +34,21 @@ $(function()
 			
 			}
 		
+		//to tackle csrf token
+		var token = $('meta[name="_csrf"]').attr('content');
+		var header = $('meta[name="_csrf_header"]').attr('content');
+		
+		if (token.length > 0 && header.length > 0) {		
+			// set the token header for the ajax request
+			$(document).ajaxSend(function(e, xhr, options) {			
+				xhr.setRequestHeader(header,token);			
+			});				
+		}
+		
+		
+		
 		//code for jquery dataTable
-	
-		
-		
+
 		var $table = $('#productListTable');
 		
 		
@@ -131,20 +145,30 @@ $(function()
 							str += '<a href="'+ window.contextRoot+ '/show/'+ data+ '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
 							
 							
-							if(row.quantity <1)
+							
+							if(userRole == 'SUPPLIER')
 								{
-								
-								str +=  '<a href="javascript void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span> </a>'	;
-								
-								
+								str += '<a href="'+ window.contextRoot+ '/manage/'+ data+ '/product" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> </a>';
+
 								}
 							else
 								{
-								str += '<a href="'+ window.contextRoot+ '/cart/add'+ data+ '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> </a>';
+	
+									if(row.quantity <1)
+										{
+								
+											str +=  '<a href="javascript void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span> </a>'	;
+			
+										}
+									else
+									  {
+			
+									   str += '<a href="'+ window.contextRoot+ '/cart/add/' +data+ '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> </a>';
+									   }
 								
 								
 								}
-							
+						
 							
 							return str;
 						}
@@ -498,6 +522,102 @@ $(function()
 			
 		}
 		
+		
+		
+	//-------------------- validation code for login form
+		
+		var $loginForm=$('#loginForm');
+		if($loginForm.length) {
+			
+			$loginForm.validate({			
+					rules: {
+						username: {
+							required: true,
+							email: true
+						},
+						password: {
+							required: true,
+											
+						}				
+					},
+					messages: {					
+						username: {
+							required: 'Please enter username!',
+							email: 'Please enter valid email address'
+						},
+						password: {
+							required: 'Whoa enter correct one!'	
+						}					
+					},
+					errorElement : "em",
+					errorPlacement : function(error, element)
+					
+					{
+						//add class of help-block
+						error.addClass('help-block');
+						
+						//add the error element after input element
+						error.insertAfter(element);
+					}				
+				}
+			
+			);
+			
+		}
+		
+		
+		
+		//------------------------
+		//handling click event of refresh cart
+		
+		$('button[name="refreshCart"]').click(function()
+
+				{
+			//fetch cartLine id
+			var cartLineId = $(this).attr('value');
+			var countElement = $('#count_' + cartLineId);
+			
+			
+			var originalCount = countElement.attr('value');
+			var currentCount =countElement.val();
+			
+			// do the checking only the count has changed
+			if(currentCount !== originalCount) 
+			
+			{			
+				
+				if(currentCount < 1 || currentCount > 3) 
+				
+				{
+					//reversing back to original count 
+					// set the field back to the original field
+					countElement.val(originalCount);
+					bootbox.alert({
+						size: 'medium',
+				    	title: 'Error',
+				    	message: 'Product  should be minimum 1 and maximum 3!'
+					});
+	
+				}
+				
+				else
+				{
+				var updateUrl = window.contextRoot + '/cart/' + cartLineId + '/update?count=' + currentCount;
+				//forward it to controler
+				window.location.href = updateUrl;
+			
+			
+				}
+			
+				
+			}
+				
+			
+			
+				})
+				
+				
+				
 		
 		
 		

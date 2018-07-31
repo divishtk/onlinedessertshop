@@ -30,7 +30,6 @@ public interface UserDAO
 	
 	//updating cart
 	
-	boolean updateCart(Cart cart);
 	
 
 }

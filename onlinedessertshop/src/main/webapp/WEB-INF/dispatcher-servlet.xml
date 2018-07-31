@@ -17,9 +17,9 @@
 
 
 
-	<context:component-scan base-package="com.dessert"/>
-	<context:component-scan base-package="com.dessert"/>  
- 
+	<context:component-scan base-package="com"/>
+<!-- 	<context:component-scan base-package="com.dessert.onli"/>  
+ --> 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />	
@@ -48,7 +48,7 @@
 	
 	<!-- Flow Builder services must required for resolving view -->
 		<wf:flow-builder-services id="flowBuilderServices"
-    	view-factory-creator="viewFactoryCreator"	/>
+    	view-factory-creator="viewFactoryCreator" validator="validator"	/>
    	
    	
    	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
@@ -64,5 +64,13 @@
 		<bean id="viewFactoryCreator" class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
          <property name="viewResolvers" ref="viewResolver" />
  	</bean>
+ 	
+ 	
+ 	<!-- Validator Bean -->
+ 		<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/> 	
+ 	
+ 	
+ 	
+ 	
    
    </beans>

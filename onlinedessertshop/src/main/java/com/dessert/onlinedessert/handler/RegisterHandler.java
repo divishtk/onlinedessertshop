@@ -1,6 +1,9 @@
 package com.dessert.onlinedessert.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.dessert.onlinedessert.model.RegisterModel;
@@ -16,6 +19,10 @@ public class RegisterHandler
 	@Autowired
 	private UserDAO userDAO;
 
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	
 	public RegisterModel init() 
      {
@@ -41,6 +48,49 @@ public class RegisterHandler
 		
 	}
 	
+	//checking is password matches confirm password
+	public String validateUser(User user,MessageContext error)
+	{
+		String transitionValue="sucess";
+		
+		if(!(user.getPassword().equals(user.getConfirmPassword())))
+		{
+			
+			error.addMessage(new MessageBuilder().error().source("confirmPassword").defaultText("Password doesnot match").build());
+			
+			transitionValue="failure";
+		}
+	
+		
+	
+	
+		//checking uniqueness of email id
+		if(userDAO.getByEmail(user.getEmail())!=null)
+		{
+			
+
+			error.addMessage(new MessageBuilder().error().source("email").defaultText("Email already exists").build());
+			
+			transitionValue ="failure";
+		}
+		
+	/*	if(userDAO.getByEmail(user.getEmail())!=null) {
+		    error.addMessage(new MessageBuilder().error().source(
+		      "email").defaultText("Email address is already taken!").build());
+		    transitionValue = "failure";
+		   }
+		
+		*/
+		
+		return transitionValue;
+		
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	public String saveAll(RegisterModel model)
@@ -61,8 +111,19 @@ public class RegisterHandler
 			
 		}
 		
-		//saving user
 		
+		
+		//encode password
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
+		
+		
+		
+		
+		
+		
+		
+		//saving user
 		userDAO.addUser(user);
 		
 		
