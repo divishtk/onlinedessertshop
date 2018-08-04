@@ -50,6 +50,7 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 
 		if(user!=null) {
 			checkoutModel = new CheckoutModel();
+		
 			
 			double checkoutTotal = 0.0;
 			List<CartLine> cartLines = cartLineDAO.listAvailable(user.getCart().getId());
