@@ -10,13 +10,13 @@ app.controller('ProductController', function($http) {
 	me.fetchProducts = function() {
 		
 		
-		$http.get('/onlineshopping/json/data/mv/products')
+		$http.get('/onlinedessertshop/json/data/mv/products')
 			.then(function(response) {
 				me.mvProducts = response.data;
 		});
 			
 			
-		$http.get('/onlineshopping/json/data/mp/products')
+		$http.get('/onlinedessertshop/json/data/mp/products')
 		.then(function(response) {
 			me.mpProducts = response.data;
 		});

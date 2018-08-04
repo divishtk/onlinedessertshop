@@ -12,6 +12,8 @@ public interface UserDAO
 	
 	//adding user
 	boolean addUser(User user);
+	User get(int id);
+
 	
 	User getByEmail(String email);
 	
@@ -20,6 +22,8 @@ public interface UserDAO
 	
 	
 	//alternative
+	Address getAddress(int addressId);
+
 	Address getBillingAddress(int userId);
 	List<Address> listShipingAddresses(int userId);
 //	

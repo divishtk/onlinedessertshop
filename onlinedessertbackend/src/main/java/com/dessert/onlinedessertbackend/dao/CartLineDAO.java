@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dessert.onlinnedessertbackend.dto.Cart;
 import com.dessert.onlinnedessertbackend.dto.CartLine;
+import com.dessert.onlinnedessertbackend.dto.OrderDetail;
 
 public interface CartLineDAO 
 
@@ -29,5 +30,8 @@ public interface CartLineDAO
 		
 //		// adding order details
 //		boolean addOrderDetail(OrderDetail orderDetail);
+		
+		// adding order details
+		boolean addOrderDetail(OrderDetail orderDetail);
 	
 }

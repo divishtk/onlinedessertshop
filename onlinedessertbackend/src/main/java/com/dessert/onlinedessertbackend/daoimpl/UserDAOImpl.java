@@ -154,7 +154,7 @@ public class UserDAOImpl implements UserDAO
 	
 	{
 		
-		String selectQuery="FROM Address where user = :user AND billing = :billing";
+		String selectQuery="FROM Address where userId = :user AND billing = :billing";
 		
 		try
 		{
@@ -169,7 +169,7 @@ public class UserDAOImpl implements UserDAO
 		catch(Exception ex) 
 		{
 			
-			 ex.printStackTrace();
+			 
 			  return null;
 	}
 	}
@@ -187,4 +187,29 @@ public class UserDAOImpl implements UserDAO
 		
 	}
 
-}
+	@Override
+	public Address getAddress(int addressId) 
+	
+	{
+		try {			
+			return sessionFactory.getCurrentSession().get(Address.class, addressId);			
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public User get(int id) {
+		try {			
+			return sessionFactory.getCurrentSession().get(User.class, id);			
+		}
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}
+	}
+	}
+
+
