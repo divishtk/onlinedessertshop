@@ -45,7 +45,7 @@
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap Readable Theme CSS -->
-<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
+<link href="${css}/bootstrap-themes.css" rel="stylesheet">
 
 <!-- Bootstrap Datatable -->
 <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">

@@ -74,6 +74,7 @@ public class Address implements Serializable
 	@Column(name="is_shipping")
 	private boolean shipping;
 	
+	@Column(name="is_billing")
 	private boolean billing;
 	
 	

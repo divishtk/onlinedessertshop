@@ -26,9 +26,7 @@ import com.dessert.onlinnedessertbackend.dto.User;
 
 @Component
 public class CheckoutHandler 
-
 {
-private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.class);
 	
 	@Autowired
 	private UserDAO userDAO;
@@ -50,7 +48,8 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 
 		if(user!=null) {
 			checkoutModel = new CheckoutModel();
-		
+			checkoutModel.setUser(user);
+			checkoutModel.setCart(user.getCart());
 			
 			double checkoutTotal = 0.0;
 			List<CartLine> cartLines = cartLineDAO.listAvailable(user.getCart().getId());
@@ -70,12 +69,12 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 		return checkoutModel;
 	}
 	
+	
 	public List<Address> getShippingAddresses(CheckoutModel model) {
-		
+				
 		List<Address> addresses = userDAO.listShipingAddresses(model.getUser().getId());
 		
-		if(addresses.size() == 0) 
-		{
+		if(addresses.size() == 0) {
 			addresses = new ArrayList<>();
 		}
 
@@ -84,9 +83,6 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 		return addresses;
 		
 	}
-	
-	
-	
 	
 	public String saveAddressSelection(CheckoutModel checkoutModel, int shippingId) {
 
@@ -101,8 +97,7 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 		return transitionValue;
 		
 	}
-	
-	
+			
 	
 	public String saveAddress(CheckoutModel checkoutModel, Address shipping) {
 
@@ -121,7 +116,7 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 		
 	}
 		
-	
+
 	public String saveOrder(CheckoutModel checkoutModel) {
 		String transitionValue = "sucess";	
 		
@@ -205,10 +200,6 @@ private static final Logger logger = LoggerFactory.getLogger(CheckoutHandler.cla
 	public OrderDetail getOrderDetail(CheckoutModel checkoutModel) {
 		return checkoutModel.getOrderDetail();
 	}
-	
-	
-	
-	
 	
 	
 	
